@@ -188,6 +188,7 @@ nav {
   text-decoration: none;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
   flex-shrink: 0;
+  position: relative;
 }
 .icon-btn svg {
   width: 15px;
@@ -200,6 +201,47 @@ nav {
   border-color: var(--fg);
   color: var(--white);
   text-decoration: none;
+}
+
+/* CSS tooltip — triggered by data-label attribute */
+.icon-btn::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%) translateY(3px);
+  background: var(--fg);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: 5px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s, transform 0.15s;
+  z-index: 20;
+}
+.icon-btn::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--fg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 20;
+}
+.icon-btn:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.icon-btn:hover::before {
+  opacity: 1;
 }
 
 /* nav buttons */
@@ -411,16 +453,117 @@ nav {
   overflow: hidden;
   border-radius: 4px;
   margin-bottom: 0.65rem;
+  cursor: pointer;
 }
+/* Natural proportions — no forced crop. Portrait shots stay tall,
+   landscape shots stay wide. overflow:hidden clips the scale hover. */
 .photo-img-wrap img {
   width: 100%;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  transition: transform 0.4s ease;
+  height: auto;
   display: block;
+  transition: transform 0.4s ease;
 }
 .photo-img-wrap:hover img {
   transform: scale(1.03);
+}
+
+/* ============================================================
+   PHOTOS — lightbox
+   ============================================================ */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.94);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+}
+.lightbox.open { display: flex; }
+
+.lightbox-img {
+  max-width: calc(100vw - 6rem);
+  max-height: calc(100vh - 7rem);
+  object-fit: contain;
+  display: block;
+  border-radius: 2px;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.lightbox-caption {
+  margin-top: 0.9rem;
+  text-align: center;
+}
+.lightbox-caption-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+}
+.lightbox-caption-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 0.2rem;
+}
+
+/* close / prev / next */
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: fixed;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.75rem;
+  transition: color 0.15s;
+  user-select: none;
+  z-index: 1001;
+  font-family: 'Inter', sans-serif;
+}
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover { color: #fff; }
+
+.lightbox-close {
+  top: 1rem;
+  right: 1.25rem;
+  font-size: 1.75rem;
+}
+.lightbox-prev,
+.lightbox-next {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.75rem;
+}
+.lightbox-prev { left: 0.75rem; }
+.lightbox-next { right: 0.75rem; }
+
+/* counter */
+.lightbox-counter {
+  position: fixed;
+  top: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  user-select: none;
+  z-index: 1001;
+}
+
+@media (max-width: 600px) {
+  .lightbox-img {
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100vh - 8rem);
+  }
+  .lightbox-prev { left: 0.25rem; }
+  .lightbox-next { right: 0.25rem; }
 }
 
 .photo-meta-row {
