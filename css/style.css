@@ -1,0 +1,450 @@
+/* ============================================================
+   patwan112.github.io – shared stylesheet
+   Fonts: EB Garamond (headings / logotype) · Inter (body)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500&display=swap');
+
+/* ---- design tokens ---- */
+:root {
+  --bg:     #fafaf8;
+  --fg:     #1a1a1a;
+  --muted:  #777;
+  --soft:   #aaa;
+  --border: #e8e8e4;
+  --white:  #fff;
+}
+
+/* ---- reset / base ---- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { font-size: 16px; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+a:hover { text-decoration: underline; }
+img { display: block; max-width: 100%; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 100;
+}
+
+.nav-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--fg);
+  letter-spacing: 0.01em;
+  flex-shrink: 0;
+}
+.nav-name:hover {
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  nav { padding: 1rem 1.25rem; }
+  .nav-links { gap: 0.9rem; }
+  .nav-links a { font-size: 0.8rem; }
+}
+
+/* ============================================================
+   HOME — CARD
+   ============================================================ */
+.home-wrap {
+  min-height: calc(100vh - 62px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.25rem;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem 2rem 2.25rem;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.06);
+}
+
+.card-photo {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1.25rem;
+  box-shadow: 0 0 0 3px var(--white), 0 0 0 4px var(--border);
+}
+
+.card-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 0.35rem;
+  color: var(--fg);
+}
+
+.card-role {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+
+.card-loc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: var(--soft);
+  margin-bottom: 1.5rem;
+}
+
+/* social icon row */
+.card-icons {
+  display: flex;
+  justify-content: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fg);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+.icon-btn svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+.icon-btn:hover {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* nav buttons */
+.card-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.card-nav-btn {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  display: inline-block;
+  width: 100%;
+  max-width: 220px;
+  padding: 0.55rem 1rem;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  color: var(--fg);
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.card-nav-btn:hover {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--white);
+  text-decoration: none;
+}
+
+@media (max-width: 480px) {
+  .card { padding: 2rem 1.5rem 1.75rem; }
+}
+
+/* ============================================================
+   PROSE PAGES  (about, now)
+   ============================================================ */
+.page-wrap {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem;
+}
+@media (max-width: 600px) {
+  .page-wrap { padding: 2rem 1.25rem; }
+}
+
+.eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--soft);
+  margin-bottom: 0.5rem;
+}
+
+.page-wrap h1 {
+  font-family: 'EB Garamond', serif;
+  font-size: 2.6rem;
+  font-weight: 500;
+  line-height: 1.15;
+  margin-bottom: 1.75rem;
+  color: var(--fg);
+}
+
+.page-wrap p {
+  margin-bottom: 1.1rem;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.page-wrap a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.page-wrap ul {
+  margin: 0.5rem 0 1.1rem 1.4rem;
+}
+.page-wrap li {
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.page-wrap h3 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 2rem 0 0.5rem;
+  color: var(--fg);
+}
+
+/* pill link row */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2.25rem;
+}
+
+.pill {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  padding: 0.45rem 1rem;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  color: var(--fg);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  display: inline-block;
+}
+.pill:hover {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* small muted footer note */
+.page-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 2.5rem;
+  line-height: 1.6;
+}
+.page-note a {
+  color: var(--muted);
+  text-underline-offset: 2px;
+}
+
+/* ============================================================
+   NOW PAGE — month blocks
+   ============================================================ */
+.now-block {
+  margin-bottom: 2.5rem;
+}
+
+.now-month {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--soft);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.75rem;
+}
+
+.now-block ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.now-block li {
+  padding: 0.2rem 0;
+  font-size: 0.975rem;
+  line-height: 1.7;
+}
+.now-block a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ============================================================
+   PHOTOS PAGE
+   ============================================================ */
+.photos-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem;
+}
+@media (max-width: 600px) {
+  .photos-wrap { padding: 2rem 1.25rem; }
+}
+
+.photos-wrap h1 {
+  font-family: 'EB Garamond', serif;
+  font-size: 2.6rem;
+  font-weight: 500;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+  color: var(--fg);
+}
+
+.photos-subtitle {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 2.75rem;
+  line-height: 1.6;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem 2.5rem;
+}
+@media (max-width: 600px) {
+  .photo-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+.photo-img-wrap {
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 0.65rem;
+}
+.photo-img-wrap img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  display: block;
+}
+.photo-img-wrap:hover img {
+  transform: scale(1.03);
+}
+
+.photo-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+.photo-tag {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.photo-loc {
+  font-size: 0.75rem;
+  color: var(--soft);
+}
+.photo-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+  color: var(--fg);
+}
+.photo-story {
+  font-size: 0.875rem;
+  color: #555;
+  line-height: 1.65;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 2rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.6;
+}
+footer a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
