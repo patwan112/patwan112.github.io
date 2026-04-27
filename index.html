@@ -27,26 +27,86 @@
   <!-- Shared stylesheet -->
   <link rel="stylesheet" href="/css/style.css">
 
-  <!--
-  ═══════════════════════════════════════════════════════
-  BACKGROUND IMAGE
-  To add a background image behind the card:
-    1. Uncomment the <style> block below.
-    2. Replace YOUR_IMAGE_URL_HERE with your image URL
-       (e.g. https://images.unsplash.com/photo-xxx?w=1600&q=80
-        or a path like /files/my-photo.jpg).
-    3. Adjust the overlay opacity (default 0.35) to taste —
-       lower = more visible image, higher = more faded.
-  Recommended image: landscape, ≥1600px wide.
-  ═══════════════════════════════════════════════════════
--->  
-<style>
+  <style>
+    /* ── Full-page fixed background ───────────────────────── */
+    body {
+      background-image: url('/files/2.jpg');
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    /* Darken overlay — fixed so it covers nav + content + footer */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.38);
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Stack everything above the overlay */
+    nav, main.home-wrap, footer { position: relative; z-index: 1; }
+
+    /* ── Nav — transparent + frosted pills ────────────────── */
+    nav {
+      background: transparent;
+      border-bottom-color: rgba(255, 255, 255, 0.12);
+    }
+    .nav-name {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+    .nav-name:hover { opacity: 0.85; text-decoration: none; }
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.28);
+      border-color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+    }
+
+    /* ── Home-wrap — transparent (bg is on body now) ──────── */
     .home-wrap {
-      background-image: url(/files/2.jpg);
+      background: transparent;
     }
-    .home-wrap::before {
-      background: rgba(0, 0, 0, 0.35);  /* darken overlay */
+    .home-wrap::before { background: transparent; }
+
+    /* ── Footer — transparent + frosted pill ──────────────── */
+    footer {
+      background: transparent;
+      border-top-color: rgba(255, 255, 255, 0.12);
     }
+    .home-footer-pill {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 12px;
+      padding: 0.55rem 1.25rem;
+      color: rgba(255, 255, 255, 0.75);
+    }
+    .home-footer-pill a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .home-footer-pill a:hover { color: #fff; }
   </style>
   
 </head>
@@ -139,17 +199,17 @@
       <!-- Nav buttons -->
       <div class="card-nav">
         <a class="card-nav-btn" href="/intro">About me</a>
-        <a class="card-nav-btn" href="/photos">Photography</a>
-        <a class="card-nav-btn" href="/now">What I'm up to</a>
       </div>
 
     </div><!-- /.card -->
   </main>
 
   <footer>
-    &copy; <span id="yr"></span> Patrick Wan ·
-    <a href="mailto:hello@patrickwan.com">hello@patrickwan.com</a>
-    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+    <span class="home-footer-pill">
+      &copy; <span id="yr"></span> Patrick Wan ·
+      <a href="mailto:hello@patrickwan.com">hello@patrickwan.com</a>
+      <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+    </span>
   </footer>
 
   <script src="/js/nav.js"></script>
