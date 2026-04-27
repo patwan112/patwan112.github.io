@@ -45,36 +45,56 @@
     <h1>Through the lens</h1>
     <p class="photos-subtitle">Moments from up in the air and out in nature.</p>
 
-    <!-- Replace src attributes and story text below with your own photos -->
+    <!--
+    ═══════════════════════════════════════════════════════════════
+    HOW TO ADD YOUR OWN PHOTOS
+    ───────────────────────────────────────────────────────────────
+    1. Add your images to the /photos/img/ folder in this repo.
+       Recommended: JPEG, ≤2 MB, landscape (3:2 ratio works best).
+       Name them simply: 1.jpg, 2.jpg … or descriptively: glider.jpg
+
+    2. For each card below, update:
+         src="/photos/img/YOUR-FILE.jpg"
+         alt="Your descriptive caption"
+         The onerror fallback (Unsplash) will show until you do.
+
+    3. Fill in the photo-title and photo-story text.
+
+    Tip: for large photos you can also commit them via GitHub.com
+    (Upload files button) — no git needed.
+    ═══════════════════════════════════════════════════════════════
+    -->
     <div class="photo-grid">
 
       <div class="photo-card">
         <div class="photo-img-wrap">
           <img
-            src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900&q=80"
-            alt="Up on a thermal — aerial view from a glider"
+            src="/photos/img/1.jpg"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900&q=80'"
+            alt="Planespotting at LAX"
             loading="lazy"
           >
         </div>
         <div class="photo-meta-row">
           <span class="photo-tag">Aviation</span>
-          <span class="photo-loc">Hunter Valley, NSW</span>
+          <span class="photo-loc">In-N-Out, Los Angeles </span>
         </div>
-        <div class="photo-title">Up on a thermal</div>
+        <div class="photo-title">My happy place - planespotting</div>
         <div class="photo-story">[Your story here]</div>
       </div>
 
       <div class="photo-card">
         <div class="photo-img-wrap">
           <img
-            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80"
-            alt="Above the valleys — Blue Mountains"
+            src="/photos/img/2.jpg"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80'"
+            alt="Person jumping over a Microsoft sign"
             loading="lazy"
           >
         </div>
         <div class="photo-meta-row">
-          <span class="photo-tag">Nature</span>
-          <span class="photo-loc">Blue Mountains, NSW</span>
+          <span class="photo-tag">Tech</span>
+          <span class="photo-loc">Building 92, Redmond</span>
         </div>
         <div class="photo-title">Above the valleys</div>
         <div class="photo-story">[Your story here]</div>
@@ -83,65 +103,69 @@
       <div class="photo-card">
         <div class="photo-img-wrap">
           <img
-            src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=900&q=80"
-            alt="Chasing dark skies — Warrumbungles"
+            src="/photos/img/3.jpg"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=900&q=80'"
+            alt="View of a concert stage with the Sydney Harbour Bridge in the background"
             loading="lazy"
           >
         </div>
         <div class="photo-meta-row">
-          <span class="photo-tag">Astrophotography</span>
-          <span class="photo-loc">Warrumbungles, NSW</span>
+          <span class="photo-tag">Music</span>
+          <span class="photo-loc">Sydney Opera House</span>
         </div>
-        <div class="photo-title">Chasing dark skies</div>
-        <div class="photo-story">One of Australia's few Dark Sky Parks — the long drive is worth it.</div>
+        <div class="photo-title">Live Gigs</div>
+        <div class="photo-story">Watching Parcels, my favourite band at an awesome venue, the Sydney Opera House Forecourt</div>
       </div>
 
       <div class="photo-card">
         <div class="photo-img-wrap">
           <img
-            src="https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?w=900&q=80"
-            alt="Bird's eye — aerial view over NSW"
+            src="/photos/img/4.jpg"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?w=900&q=80'"
+            alt="Photo of a couple"
             loading="lazy"
           >
         </div>
         <div class="photo-meta-row">
-          <span class="photo-tag">Aviation</span>
-          <span class="photo-loc">NSW</span>
+          <span class="photo-tag">Friends & Family</span>
+          <span class="photo-loc">Uluwatu, Bali</span>
         </div>
-        <div class="photo-title">Bird's eye</div>
+        <div class="photo-title">My Best Friend</div>
         <div class="photo-story">[Your story here]</div>
       </div>
 
       <div class="photo-card">
         <div class="photo-img-wrap">
           <img
-            src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=900&q=80"
-            alt="Snowboard season — Snowy Mountains"
+            src="/photos/img/5.jpg"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=900&q=80'"
+            alt="A small painting held up with Mount Everest in the background"
             loading="lazy"
           >
         </div>
         <div class="photo-meta-row">
-          <span class="photo-tag">Snowboarding</span>
-          <span class="photo-loc">Snowy Mountains, NSW</span>
+          <span class="photo-tag">Geocaching</span>
+          <span class="photo-loc">Everest Base Camp, Tibet</span>
         </div>
-        <div class="photo-title">Snowboard season</div>
+        <div class="photo-title">Finding Geocache GC9A9E at Base Camp</div>
         <div class="photo-story">[Your story here]</div>
       </div>
 
       <div class="photo-card">
         <div class="photo-img-wrap">
           <img
-            src="https://images.unsplash.com/photo-1467803738586-46b7eb7b16a1?w=900&q=80"
-            alt="Southern adventures — Hobart, Tasmania"
+            src="/photos/img/6.jpg"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1467803738586-46b7eb7b16a1?w=900&q=80'"
+            alt="Scuba Diving"
             loading="lazy"
           >
         </div>
         <div class="photo-meta-row">
-          <span class="photo-tag">Nature</span>
-          <span class="photo-loc">Hobart, TAS</span>
+          <span class="photo-tag">Scuba</span>
+          <span class="photo-loc">Gordon's Bay, Sydney</span>
         </div>
-        <div class="photo-title">Southern adventures</div>
-        <div class="photo-story">Chasing the Southern Lights — the aurora didn't show, but the waterfalls did.</div>
+        <div class="photo-title">Diving around Sydney's Beaches</div>
+        <div class="photo-story">[Your story here]</div>
       </div>
 
     </div><!-- /.photo-grid -->

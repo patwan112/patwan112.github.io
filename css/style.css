@@ -100,6 +100,26 @@ nav {
   align-items: center;
   justify-content: center;
   padding: 3rem 1.25rem;
+  position: relative; /* required for the optional background overlay */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* semi-transparent overlay — only visible when a bg image is active */
+.home-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;   /* set to e.g. rgba(0,0,0,0.35) once you add a bg image */
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* keep card above the overlay */
+.home-wrap .card {
+  position: relative;
+  z-index: 1;
 }
 
 .card {
@@ -447,4 +467,97 @@ footer a {
   color: var(--muted);
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+/* ============================================================
+   NOW PAGE — history / collapsible year sections
+   ============================================================ */
+.now-history-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--soft);
+  margin: 3rem 0 1.1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* each year = a <details> element */
+.now-year {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 0.65rem;
+  overflow: hidden;
+}
+
+.now-year > summary {
+  list-style: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  font-family: 'EB Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--fg);
+  user-select: none;
+  transition: background 0.15s;
+  gap: 0.5rem;
+}
+.now-year > summary::-webkit-details-marker { display: none; }
+.now-year > summary::marker { display: none; }
+.now-year > summary:hover { background: rgba(0, 0, 0, 0.025); }
+
+.now-year-chevron {
+  font-size: 0.7rem;
+  color: var(--soft);
+  font-family: 'Inter', sans-serif;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+details[open] .now-year-chevron {
+  transform: rotate(180deg);
+}
+
+.now-year-body {
+  padding: 1.1rem 1.25rem 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+/* highlight block inside each year */
+.now-highlight {
+  background: #f4f4f1;
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.75rem;
+}
+.now-highlight-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  color: var(--muted);
+  margin-bottom: 0.45rem;
+}
+.now-highlight ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.now-highlight li {
+  font-size: 0.9rem;
+  color: var(--fg);
+  line-height: 1.7;
+  padding: 0.1rem 0;
+}
+
+/* skeleton / unfilled month */
+.now-placeholder {
+  color: var(--soft) !important;
+  font-style: italic;
 }

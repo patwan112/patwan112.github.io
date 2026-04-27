@@ -26,6 +26,28 @@
 
   <!-- Shared stylesheet -->
   <link rel="stylesheet" href="/css/style.css">
+
+  <!--
+  ═══════════════════════════════════════════════════════
+  BACKGROUND IMAGE
+  To add a background image behind the card:
+    1. Uncomment the <style> block below.
+    2. Replace YOUR_IMAGE_URL_HERE with your image URL
+       (e.g. https://images.unsplash.com/photo-xxx?w=1600&q=80
+        or a path like /files/my-photo.jpg).
+    3. Adjust the overlay opacity (default 0.35) to taste —
+       lower = more visible image, higher = more faded.
+  Recommended image: landscape, ≥1600px wide.
+  ═══════════════════════════════════════════════════════
+  <style>
+    .home-wrap {
+      background-image: url('YOUR_IMAGE_URL_HERE');
+    }
+    .home-wrap::before {
+      background: rgba(0, 0, 0, 0.35);  /* darken overlay */
+    }
+  </style>
+  -->
 </head>
 <body>
 
