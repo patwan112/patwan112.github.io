@@ -723,10 +723,10 @@ details[open] .now-year-chevron {
   padding: 0;
 }
 .now-highlight li {
-  font-size: 0.9rem;
+  font-size: 1.075rem;
   color: var(--fg);
   line-height: 1.7;
-  padding: 0.1rem 0;
+  padding: 0.15rem 0;
 }
 
 /* skeleton / unfilled month */
