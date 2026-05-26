@@ -1,9 +1,9 @@
-/* ============================================================
-   patwan112.github.io – shared stylesheet
-   Fonts: EB Garamond (headings / logotype) · Inter (body)
+﻿/* ============================================================
+   patwan112.github.io ΓÇô shared stylesheet
+   Fonts: EB Garamond (headings / logotype) ┬╖ Inter (body)
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:ital,wght@0,400;0,500;1,400;1,500&display=swap');
 
 /* ---- design tokens ---- */
 :root {
@@ -92,7 +92,7 @@ nav {
 }
 
 /* ============================================================
-   HOME — CARD
+   HOME ΓÇö CARD
    ============================================================ */
 .home-wrap {
   min-height: calc(100vh - 62px);
@@ -106,7 +106,7 @@ nav {
   background-repeat: no-repeat;
 }
 
-/* semi-transparent overlay — only visible when a bg image is active */
+/* semi-transparent overlay ΓÇö only visible when a bg image is active */
 .home-wrap::before {
   content: '';
   position: absolute;
@@ -203,7 +203,7 @@ nav {
   text-decoration: none;
 }
 
-/* CSS tooltip — triggered by data-label attribute */
+/* CSS tooltip ΓÇö triggered by data-label attribute */
 .icon-btn::after {
   content: attr(data-label);
   position: absolute;
@@ -383,7 +383,7 @@ nav {
 }
 
 /* ============================================================
-   NOW PAGE — month blocks
+   NOW PAGE ΓÇö month blocks
    ============================================================ */
 .now-block {
   margin-bottom: 2.5rem;
@@ -410,6 +410,27 @@ nav {
   padding: 0.2rem 0;
   font-size: 0.975rem;
   line-height: 1.7;
+}
+.now-block li em,
+.now-highlight li em {
+  font-style: italic;
+  font-size: inherit;
+}
+.now-block li sup,
+.now-highlight li sup {
+  font-size: 0.7em;
+  line-height: 0;
+  vertical-align: super;
+}
+.now-block li sub,
+.now-highlight li sub {
+  font-size: 0.7em;
+  line-height: 0;
+  vertical-align: sub;
+}
+.now-block li strong,
+.now-highlight li strong {
+  font-weight: 600;
 }
 .now-block a {
   color: var(--fg);
@@ -464,7 +485,7 @@ nav {
   margin-bottom: 0.65rem;
   cursor: pointer;
 }
-/* Natural proportions — no forced crop. Portrait shots stay tall,
+/* Natural proportions ΓÇö no forced crop. Portrait shots stay tall,
    landscape shots stay wide. overflow:hidden clips the scale hover. */
 .photo-img-wrap img {
   width: 100%;
@@ -477,7 +498,7 @@ nav {
 }
 
 /* ============================================================
-   PHOTOS — lightbox
+   PHOTOS ΓÇö lightbox
    ============================================================ */
 .lightbox {
   display: none;
@@ -622,7 +643,7 @@ footer a {
 }
 
 /* ============================================================
-   NOW PAGE — history / collapsible year sections
+   NOW PAGE ΓÇö history / collapsible year sections
    ============================================================ */
 .now-history-heading {
   font-family: 'Inter', sans-serif;
