@@ -734,3 +734,11 @@ details[open] .now-year-chevron {
   color: var(--soft) !important;
   font-style: italic;
 }
+
+/* Hide the top "Current Entry" scaffold while it only contains the
+   placeholder bullet. The block re-appears automatically the moment a
+   real <li> is added (or the placeholder class is removed). Scoped to
+   the top-level block so year-internal placeholders still render. */
+.page-wrap > .now-block:has(> ul > li.now-placeholder:only-child) {
+  display: none;
+}
