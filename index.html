@@ -1,16 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patrick Wan</title>
 
-  <!-- SEO / OG -->
-  <meta name="description" content="Technologist and av-geek. Hiker. Aussie.">
+  <!-- SEO -->
+  <meta name="description" content="Patrick Wan — Sydney-based partner manager at Microsoft. Digital business card with contact, LinkedIn, GitHub, and meeting-booking links.">
+  <meta name="author" content="Patrick Wan">
+  <link rel="canonical" href="https://patrickwan.com/">
+
+  <!-- Open Graph -->
   <meta property="og:title" content="Patrick Wan">
-  <meta property="og:description" content="Technologist and av-geek. Hiker. Aussie.">
-  <meta property="og:url" content="https://patwan112.github.io/">
+  <meta property="og:description" content="Patrick Wan — Sydney-based partner manager at Microsoft. Digital business card with contact, LinkedIn, GitHub, and meeting-booking links.">
+  <meta property="og:url" content="https://patrickwan.com/">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Patrick Wan">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:image" content="https://patrickwan.com/files/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Patrick Wan — personal site">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Patrick Wan">
+  <meta name="twitter:description" content="Patrick Wan — Sydney-based partner manager at Microsoft. Digital business card with contact, LinkedIn, GitHub, and meeting-booking links.">
+  <meta name="twitter:image" content="https://patrickwan.com/files/og-image.jpg">
 
   <!-- Favicons -->
   <link rel="icon" href="/files/favicon-animated-png.png" type="image/png">
@@ -108,7 +124,45 @@
     }
     .home-footer-pill a:hover { color: #fff; }
   </style>
-  
+
+  <!-- Structured data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://patrickwan.com/#website",
+        "url": "https://patrickwan.com/",
+        "name": "Patrick Wan",
+        "inLanguage": "en-AU",
+        "publisher": { "@id": "https://patrickwan.com/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://patrickwan.com/#person",
+        "name": "Patrick Wan",
+        "url": "https://patrickwan.com/",
+        "image": "https://patrickwan.com/files/1.jpg",
+        "jobTitle": "Distribution Partner Manager",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Microsoft"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Sydney",
+          "addressCountry": "AU"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/patrick-wan/",
+          "https://github.com/patwan112"
+        ],
+        "mainEntityOfPage": "https://patrickwan.com/"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -118,7 +172,7 @@
       <li><a href="/intro">About</a></li>
       <li><a href="/now">Now</a></li>
       <li><a href="/photos">Photos</a></li>
-      <li><a href="https://linkedin.com/in/patrick-wan/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+      <li><a href="https://www.linkedin.com/in/patrick-wan/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
     </ul>
   </nav>
 
@@ -128,13 +182,13 @@
       <!-- Profile photo -->
       <img
         class="card-photo"
-        src="https://github.com/patwan112/patwan112/blob/main/files/1.jpg?raw=true"
+        src="/files/1.jpg"
         alt="Patrick Wan"
       >
 
       <!-- Name / role / location -->
       <div class="card-name">Patrick Wan</div>
-      <div class="card-role">Partner Development Manager · Microsoft</div>
+      <div class="card-role">Distribution Partner Manager · Microsoft</div>
       <div class="card-loc">Sydney, Australia</div>
 
       <!-- Social icon row -->
