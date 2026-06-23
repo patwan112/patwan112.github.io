@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journal — Patrick Wan</title>
+
+  <!-- Unlisted for now: keep out of search results until the content is real. -->
+  <meta name="robots" content="noindex, follow">
+
+  <!-- SEO -->
+  <meta name="description" content="Patrick Wan's journal — a quarterly log of longer notes, musings, and what he's been thinking about.">
+  <meta name="author" content="Patrick Wan">
+  <link rel="canonical" href="https://patrickwan.com/journal/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Journal — Patrick Wan">
+  <meta property="og:description" content="Patrick Wan's journal — a quarterly log of longer notes, musings, and what he's been thinking about.">
+  <meta property="og:url" content="https://patrickwan.com/journal/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Patrick Wan">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:image" content="https://patrickwan.com/files/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Patrick Wan — personal site">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Journal — Patrick Wan">
+  <meta name="twitter:description" content="Patrick Wan's journal — a quarterly log of longer notes, musings, and what he's been thinking about.">
+  <meta name="twitter:image" content="https://patrickwan.com/files/og-image.jpg">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/files/favicon-animated-png.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/files/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/files/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/files/favicon-16x16.png">
+  <link rel="manifest" href="/files/site.webmanifest">
+  <link rel="mask-icon" href="/files/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/files/favicon.ico">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-config" content="/files/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Shared stylesheet -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <nav>
+    <a class="nav-name" href="/">Patrick Wan</a>
+    <ul class="nav-links">
+      <li><a href="/intro">About</a></li>
+      <li><a href="/now">Now</a></li>
+      <li><a href="/photos">Photos</a></li>
+      <li><a href="https://www.linkedin.com/in/patrick-wan/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+    </ul>
+  </nav>
+
+  <main class="page-wrap">
+
+    <p class="eyebrow">Journal</p>
+    <h1>Notes &amp; musings</h1>
+    <p class="photos-subtitle">A quarterly log — longer thoughts, what I'm learning, and the odd tangent.</p>
+
+    <!-- ─── TABLE OF CONTENTS ────────────────────────────────────────────────
+         A single horizontal strip of quarter links. On mobile it stays one line
+         and scrolls sideways (swipe). To add a quarter: add an <li> here AND a
+         matching <article id="…"> below. Keep both newest-first.
+    ──────────────────────────────────────────────────────────────────────── -->
+    <nav class="journal-toc" aria-label="Journal entries by quarter">
+      <ul>
+        <li><a href="#2026-q2">2026 · Q2</a></li>
+        <li><a href="#2026-q1">2026 · Q1</a></li>
+        <li><a href="#2025-q4">2025 · Q4</a></li>
+      </ul>
+    </nav>
+
+    <!-- ─── ENTRIES — newest first ───────────────────────────────────────────
+         Each quarter = one <article class="journal-entry" id="YYYY-qN" tabindex="-1">.
+         Format: <h2> heading, an OPTIONAL intro <p>, then a <ul> of bullets.
+         Delete the intro <p> if a quarter is bullets-only.
+    ──────────────────────────────────────────────────────────────────────── -->
+
+    <article class="journal-entry" id="2026-q2" tabindex="-1">
+      <h2>2026 · Q2</h2>
+      <p>A short intro paragraph for the quarter — the through-line, what it felt like, a musing worth a few sentences. <em>(Optional: delete this line for a bullets-only quarter.)</em></p>
+      <ul>
+        <li>📝 Something worth noting this quarter — replace me.</li>
+        <li>🛫 Somewhere you went, or something you made.</li>
+        <li>📚 Something you read, watched, or learned.</li>
+      </ul>
+    </article>
+
+    <article class="journal-entry" id="2026-q1" tabindex="-1">
+      <h2>2026 · Q1</h2>
+      <p>Another optional intro paragraph. This is the place for the longer-form "musings" that don't fit the bullet rhythm of the <strong>Now</strong> page.</p>
+      <ul>
+        <li>💭 A reflection or a theme that ran through the quarter.</li>
+        <li>🔧 A project, an experiment, a thing you tinkered with.</li>
+      </ul>
+    </article>
+
+    <article class="journal-entry" id="2025-q4" tabindex="-1">
+      <h2>2025 · Q4</h2>
+      <ul>
+        <li>🎯 A bullets-only quarter — no intro paragraph needed.</li>
+        <li>🗺️ Add as many bullets as the quarter deserves.</li>
+      </ul>
+    </article>
+
+    <p class="page-note">
+      A scaffold for quarterly notes — new entries are added every few months.
+    </p>
+
+  </main>
+
+  <footer>
+    &copy; <span id="yr"></span> Patrick Wan ·
+    <a href="mailto:hello@patrickwan.com">hello@patrickwan.com</a>
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+  <script src="/js/nav.js"></script>
+</body>
+</html>

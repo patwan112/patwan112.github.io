@@ -13,6 +13,9 @@
   --soft:   #aaa;
   --border: #e8e8e4;
   --white:  #fff;
+  /* offset for anchor jumps so the sticky nav doesn't cover the target.
+     Overridden larger on mobile (where the nav stacks taller). */
+  --sticky-offset: 86px;
 }
 
 /* ---- reset / base ---- */
@@ -22,7 +25,15 @@
   padding: 0;
 }
 
-html { font-size: 16px; }
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--sticky-offset);
+}
+/* Respect users who prefer reduced motion — no smooth-scroll animation. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 
 body {
   background: var(--bg);
@@ -86,8 +97,22 @@ nav {
 }
 
 @media (max-width: 600px) {
-  nav { padding: 1rem 1.25rem; }
-  .nav-links { gap: 0.9rem; }
+  /* nav stacks taller when wrapped, so jump targets need more clearance */
+  :root { --sticky-offset: 112px; }
+  /* Stack + centre on narrow screens so the brand and links don't wrap into
+     a lopsided block. Works for the plain-text inner-page nav and the home
+     page's frosted pills alike (both inherit this shared layout). */
+  nav {
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 0.9rem 1.25rem;
+  }
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+    gap: 0.5rem 0.85rem;
+  }
   .nav-links a { font-size: 0.8rem; }
 }
 
@@ -741,4 +766,117 @@ details[open] .now-year-chevron {
    the top-level block so year-internal placeholders still render. */
 .page-wrap > .now-block:has(> ul > li.now-placeholder:only-child) {
   display: none;
+}
+
+/* ============================================================
+   JOURNAL PAGE — quarterly notes & musings
+   ============================================================ */
+/* Horizontal, swipeable "table of contents" strip.
+   It's a <nav>, so first neutralise the global sticky nav styling. */
+.journal-toc {
+  display: block;
+  position: static;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  z-index: auto;
+  margin: 0 0 2.25rem;
+}
+.journal-toc ul {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+  /* right padding lets the last pill peek out past the fade as a scroll hint */
+  padding: 0 1.5rem 0.55rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  /* fade the right edge to signal there's more to scroll horizontally */
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 1.5rem), transparent 100%);
+          mask-image: linear-gradient(to right, #000 calc(100% - 1.5rem), transparent 100%);
+}
+.journal-toc li { margin: 0; }
+.journal-toc a {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding: 0.4rem 0.9rem;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  color: var(--fg);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.journal-toc a:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+}
+/* hover only on real pointer devices, so taps don't leave pills "stuck" */
+@media (hover: hover) {
+  .journal-toc a:hover {
+    background: var(--fg);
+    border-color: var(--fg);
+    color: var(--white);
+  }
+}
+
+/* Each quarter = an <article>; tabindex="-1" lets anchor clicks move keyboard
+   focus into the entry instead of snapping back to the top on next Tab. */
+.journal-entry {
+  margin-bottom: 2.75rem;
+  scroll-margin-top: var(--sticky-offset);
+}
+.journal-entry:focus { outline: none; }
+.journal-entry h2 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.65rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--fg);
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+.journal-entry > p {
+  margin-bottom: 0.9rem;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+.journal-entry ul {
+  margin: 0.5rem 0 0 1.4rem;
+}
+.journal-entry li {
+  margin-bottom: 0.45rem;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+@media (max-width: 600px) {
+  .journal-toc { margin-bottom: 1.75rem; }
+  .journal-entry h2 { font-size: 1.4rem; }
+  .journal-entry li { font-size: 0.95rem; line-height: 1.65; }
+}
+
+/* ============================================================
+   NOW PAGE — mobile readability (tighter boxes + smaller type)
+   Kept at the end of the file so it follows the desktop .now-*
+   rules and wins on source order at equal specificity.
+   ============================================================ */
+@media (max-width: 600px) {
+  .now-month { font-size: 0.68rem; }
+  .now-block { margin-bottom: 1.8rem; }
+  .now-block li { font-size: 0.9rem; line-height: 1.6; }
+
+  .now-year > summary { font-size: 1.15rem; padding: 0.8rem 0.95rem; }
+  .now-year-body { padding: 0.9rem 0.95rem 0.6rem; }
+
+  .now-highlight { padding: 0.7rem 0.85rem; margin-bottom: 1.4rem; }
+  .now-highlight-label { font-size: 0.64rem; }
+  .now-highlight li { font-size: 0.95rem; line-height: 1.6; }
+
+  .now-history-heading { margin: 2.25rem 0 0.9rem; }
 }
