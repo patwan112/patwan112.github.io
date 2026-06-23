@@ -561,11 +561,11 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 1rem 1rem 5.5rem;      /* extra bottom room so the caption clears the image */
 }
 .lightbox-slide img {
   max-width: calc(100vw - 6rem);
-  max-height: calc(100vh - 7rem);
+  max-height: 100%;               /* fits the padded slide (bottom padding reserves caption space) */
   object-fit: contain;
   border-radius: 2px;
   user-select: none;
@@ -649,9 +649,9 @@ nav {
 }
 
 @media (max-width: 600px) {
+  .lightbox-slide { padding-bottom: 6rem; }   /* a touch more room for wrapped captions */
   .lightbox-slide img {
     max-width: calc(100vw - 2rem);
-    max-height: calc(100vh - 9rem);   /* keep clear of the fixed caption */
   }
   .lightbox-prev { left: 0.25rem; }
   .lightbox-next { right: 0.25rem; }
