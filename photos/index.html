@@ -189,12 +189,12 @@
   </main>
 
   <!-- ── Lightbox overlay ──────────────────────────────────── -->
-  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" tabindex="-1">
     <span class="lightbox-counter" id="lb-counter"></span>
     <button class="lightbox-close" id="lb-close" aria-label="Close">&#215;</button>
     <button class="lightbox-prev"  id="lb-prev"  aria-label="Previous photo">&#8592;</button>
     <button class="lightbox-next"  id="lb-next"  aria-label="Next photo">&#8594;</button>
-    <img class="lightbox-img" id="lb-img" src="" alt="">
+    <div class="lightbox-track" id="lb-track"></div>
     <div class="lightbox-caption">
       <div class="lightbox-caption-title" id="lb-title"></div>
       <div class="lightbox-caption-meta"  id="lb-meta"></div>
@@ -210,20 +210,23 @@
   <script src="/js/nav.js"></script>
   <script>
     (function () {
-      // ── collect all photo cards ──────────────────────────────
+      // ── elements ─────────────────────────────────────────────
       var wraps  = document.querySelectorAll('.photo-img-wrap');
       var lb     = document.getElementById('lightbox');
-      var lbImg  = document.getElementById('lb-img');
+      var track  = document.getElementById('lb-track');
       var lbTitle= document.getElementById('lb-title');
       var lbMeta = document.getElementById('lb-meta');
       var lbCtr  = document.getElementById('lb-counter');
-      var current= 0;
+      var prevBtn= document.getElementById('lb-prev');
+      var nextBtn= document.getElementById('lb-next');
+      var current= 0, built = false, lastFocus = null;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       var data = Array.from(wraps).map(function (wrap) {
         var img  = wrap.querySelector('img');
         var card = wrap.closest('.photo-card');
         return {
-          src  : img.currentSrc || img.src,
+          el   : img,
           alt  : img.alt,
           title: card.querySelector('.photo-title').textContent,
           tag  : card.querySelector('.photo-tag').textContent,
@@ -231,65 +234,99 @@
         };
       });
 
-      // ── show / close ─────────────────────────────────────────
-      function show(index) {
-        current = ((index % data.length) + data.length) % data.length;
-        var d = data[current];
-        lbImg.src     = d.src;
-        lbImg.alt     = d.alt;
+      // ── build the slide track once (lazily, so grid src has resolved) ──
+      function build() {
+        data.forEach(function (d) {
+          var slide = document.createElement('div');
+          slide.className = 'lightbox-slide';
+          var img = document.createElement('img');
+          img.src = d.el.currentSrc || d.el.src;
+          img.alt = d.alt;
+          var oe = d.el.getAttribute('onerror');
+          if (oe) img.setAttribute('onerror', oe);   // preserve grid fallback
+          slide.appendChild(img);
+          track.appendChild(slide);
+        });
+        track.addEventListener('scroll', onScroll, { passive: true });
+        built = true;
+      }
+
+      // ── update caption / counter / button state for index i ──
+      function syncFrom(i) {
+        current = i;
+        var d = data[i];
         lbTitle.textContent = d.title;
         lbMeta.textContent  = d.tag + ' · ' + d.loc;
-        lbCtr.textContent   = (current + 1) + ' / ' + data.length;
+        lbCtr.textContent   = (i + 1) + ' / ' + data.length;
+        prevBtn.disabled = (i === 0);
+        nextBtn.disabled = (i === data.length - 1);
+      }
+
+      // rAF-throttled scroll → keep caption/counter in sync while swiping
+      var raf = 0;
+      function onScroll() {
+        if (raf) return;
+        raf = requestAnimationFrame(function () {
+          raf = 0;
+          var i = Math.round(track.scrollLeft / track.clientWidth);
+          i = Math.max(0, Math.min(data.length - 1, i));
+          if (i !== current) syncFrom(i);
+        });
+      }
+
+      // ── open / navigate / close ──────────────────────────────
+      function show(index) {
+        if (!built) build();
+        var i = Math.max(0, Math.min(data.length - 1, index));
+        lastFocus = document.activeElement;
         lb.classList.add('open');
         document.body.style.overflow = 'hidden';
+        void track.offsetWidth;                  // force layout so clientWidth is valid
+        track.scrollLeft = i * track.clientWidth; // jump to the tapped photo (no animation)
+        syncFrom(i);
+        lb.focus();
+      }
+
+      function go(index) {
+        var i = Math.max(0, Math.min(data.length - 1, index));
+        syncFrom(i);                              // update now so rapid presses aren't stale
+        track.scrollTo({ left: i * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
       }
 
       function close() {
         lb.classList.remove('open');
         document.body.style.overflow = '';
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
       }
 
-      // ── click on any image wrap ───────────────────────────────
+      // ── wiring ───────────────────────────────────────────────
       wraps.forEach(function (wrap, i) {
         wrap.addEventListener('click', function () { show(i); });
       });
 
-      // ── controls ─────────────────────────────────────────────
       document.getElementById('lb-close').addEventListener('click', close);
+      prevBtn.addEventListener('click', function (e) { e.stopPropagation(); go(current - 1); });
+      nextBtn.addEventListener('click', function (e) { e.stopPropagation(); go(current + 1); });
 
-      document.getElementById('lb-prev').addEventListener('click', function (e) {
-        e.stopPropagation();
-        show(current - 1);
+      // tap the dark area (not the photo) to close
+      track.addEventListener('click', function (e) {
+        if (e.target.tagName !== 'IMG') close();
       });
-
-      document.getElementById('lb-next').addEventListener('click', function (e) {
-        e.stopPropagation();
-        show(current + 1);
-      });
-
-      // click backdrop (not the image / buttons) to close
       lb.addEventListener('click', function (e) {
         if (e.target === lb) close();
       });
 
-      // ── keyboard ─────────────────────────────────────────────
+      // keep alignment on resize / orientation change
+      window.addEventListener('resize', function () {
+        if (lb.classList.contains('open')) track.scrollLeft = current * track.clientWidth;
+      });
+
       document.addEventListener('keydown', function (e) {
         if (!lb.classList.contains('open')) return;
         if (e.key === 'Escape')      close();
-        if (e.key === 'ArrowLeft')   show(current - 1);
-        if (e.key === 'ArrowRight')  show(current + 1);
+        if (e.key === 'ArrowLeft')   go(current - 1);
+        if (e.key === 'ArrowRight')  go(current + 1);
       });
-
-      // ── swipe (mobile) ────────────────────────────────────────
-      var touchStartX = 0;
-      lb.addEventListener('touchstart', function (e) {
-        touchStartX = e.touches[0].clientX;
-      }, { passive: true });
-
-      lb.addEventListener('touchend', function (e) {
-        var dx = e.changedTouches[0].clientX - touchStartX;
-        if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
-      }, { passive: true });
     })();
   </script>
 </body>
